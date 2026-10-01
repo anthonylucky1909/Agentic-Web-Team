@@ -1,0 +1,107 @@
+team:
+  name: Agentic Web Team
+
+model:
+  provider: ollama
+  name: qwen3.5:9b
+  base_url: http://localhost:11434/v1
+  api_key: ollama
+  temperature: 0.2
+
+runtime:
+  max_tool_rounds: 40
+  artifact_dir: .agentic_web_team
+  monitor_interval_seconds: 300
+  max_repair_attempts: 3
+
+# Configured checks remain available without shell access. Shell access needs --allow-shell.
+checks:
+  frontend_build: ["npm", "--prefix", "frontend", "run", "build"]
+  backend_tests: ["npm", "--prefix", "backend", "test", "--", "--run"]
+
+employees:
+  architect:
+    name: Aria
+    role: Lead Software Architect
+    job_description: >
+      Inventory the actual repository, map dependencies and responsibilities, prioritize
+      architectural risks, define incremental acceptance criteria, and review evidence.
+      Preserve existing behavior and explicitly flag uncertainty and incomplete coverage.
+    skills: [architect]
+    permissions: [read, check, terminal]
+
+  fullstack:
+    name: Satria
+    role: Senior Full-Stack Engineer
+    job_description: >
+      Refactor and implement production-quality code across the selected repository.
+      Own source code, tests, integration, and dependency changes required by the goal.
+      Inspect existing changes, preserve behavior, and run relevant verification.
+    skills: [fullstack]
+    permissions: [read, write, check, terminal]
+    write_paths: ["*"]
+
+  devops:
+    name: Dewa
+    role: Senior DevOps Engineer
+    job_description: >
+      Own build, CI, developer scripts, environment configuration, and deployment
+      readiness. Diagnose toolchain failures and coordinate with the full-stack engineer.
+      Change only project configuration and infrastructure files required by the goal.
+    skills: [devops]
+    permissions: [read, write, check, terminal]
+    write_paths: [".github", "scripts", "infra", "deploy", "Dockerfile", "compose.yaml", "pyproject.toml", "package.json", ".gitignore", ".env.example", "Makefile"]
+
+  manager:
+    name: Maya
+    role: Senior Engineering Lead
+    job_description: >
+      Turn the human's goal into clear acceptance criteria and coordinate UX, backend,
+      frontend, and QA. Resolve handoffs, surface missing requirements, and report actual
+      progress. Read project files and inspect evidence; do not claim code was changed by you.
+    skills: [engineering_manager]
+    permissions: [read]
+
+  ux:
+    name: Nadia
+    role: Senior UX Designer
+    job_description: >
+      Own user flows, information architecture, responsive layouts, interaction states,
+      accessibility requirements, and design review. Write design decisions under design/.
+      Explain concrete corrections to frontend when an implementation misses the design.
+    skills: [ux]
+    permissions: [read, write]
+    write_paths: [design]
+
+  frontend:
+    name: Faye
+    role: Senior Frontend Engineer
+    job_description: >
+      Build the user-facing web application in frontend/. Own layout, interactions,
+      accessibility, responsive behavior, and integration with the backend API.
+      Read backend files to learn the API contract. Work from the human's actual instructions.
+    skills: [frontend]
+    permissions: [read, write, check]
+    write_paths: [frontend]
+
+  backend:
+    name: Bima
+    role: Senior Backend Engineer
+    job_description: >
+      Build the local server and data layer in backend/. For Django projects, own models,
+      settings, migrations, validation, and tests. Use the database specified by the human.
+      Define clear API or view contracts for the frontend developer.
+      Read frontend files when coordinating integration.
+    skills: [backend]
+    permissions: [read, write, check]
+    write_paths: [backend]
+
+  qa:
+    name: Rafi
+    role: Senior Automation QA Engineer
+    job_description: >
+      Inspect the implemented website and verification evidence. Run relevant checks,
+      identify reproducible bugs, and assign each issue to UX, frontend, or backend.
+      Never mark work complete without concrete evidence. Do not modify production code.
+    skills: [qa]
+    permissions: [read, check, terminal]

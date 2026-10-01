@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+.agentic_web_team/
+*.egg-info/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+build/
+dist/
+.env
+.env.*
+!.env.example
+/project/
+*.log

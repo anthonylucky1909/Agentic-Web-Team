@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentic-web-team"
+version = "0.3.0"
+description = "Local multi-agent web development and repository upgrade workflows"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "openai>=1.50,<4",
+  "PyYAML>=6,<7",
+  "pydantic>=2.8,<3",
+  "prompt_toolkit>=3,<4",
+  "rich>=13.7,<16",
+]
+
+[project.optional-dependencies]
+dev = ["ruff>=0.9,<1", "mypy>=1.15,<2", "types-PyYAML>=6,<7"]
+
+[project.scripts]
+agentic-web-team = "agentic_web_team.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["agentic_web_team*"]
+
+[tool.setuptools.package-data]
+agentic_web_team = ["defaults/team.yaml", "defaults/skills/*/SKILL.md"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+extend-exclude = ["project"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.mypy]
+python_version = "3.11"
+check_untyped_defs = true
+warn_unused_ignores = true
+ignore_missing_imports = true

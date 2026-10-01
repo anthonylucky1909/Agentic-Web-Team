@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install
+        run: python -m pip install -e '.[dev]'
+      - name: Lint
+        run: ruff check .
+      - name: Format
+        run: ruff format --check .
+      - name: Type check
+        run: mypy agentic_web_team
+      - name: Tests
+        run: python -m unittest discover -s tests -v
+      - name: Build wheel
+        run: python -m pip wheel --no-deps --wheel-dir dist .
+      - name: Installed-package smoke test
+        run: |
+          python -m pip install --no-deps --target /tmp/agentic-package dist/agentic_web_team-*.whl
+          cd /tmp
+          PYTHONPATH=/tmp/agentic-package python -c 'from agentic_web_team.config import load_config, load_skill_text; c = load_config(); assert len(c.employees) == 5; assert load_skill_text(c, ["backend"])'
