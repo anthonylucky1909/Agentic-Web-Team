@@ -1,5 +1,5 @@
 # Agentic Web Team
-![Agentic Web Team pipeline showing planning, parallel implementation, QA repair loops, monitoring, and the separate GitHub CI checks](agentic-web-team-pipeline.png)
+
 Agentic Web Team is a local CLI that coordinates a role-based AI development team around a real workspace. It can help plan and build new web projects, upgrade existing repositories, run verification checks, route QA findings back to the right owner, and keep monitoring the project until you stop the workflow.
 
 The web workflow uses a lead, UX designer, frontend engineer, backend engineer, and QA engineer. The repository-upgrade workflow uses a lead architect, senior full-stack engineer, DevOps engineer, and automation QA engineer. All roles share one configured OpenAI-compatible model endpoint; the default setup uses a local Ollama model.
