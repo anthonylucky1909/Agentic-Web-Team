@@ -35,4 +35,4 @@ jobs:
         run: |
           python -m pip install --no-deps --target /tmp/agentic-package dist/agentic_web_team-*.whl
           cd /tmp
-          PYTHONPATH=/tmp/agentic-package python -c 'from agentic_web_team.config import load_config, load_skill_text; c = load_config(); assert len(c.employees) == 5; assert load_skill_text(c, ["backend"])'
+          PYTHONPATH=/tmp/agentic-package python -c 'from agentic_web_team.config import load_config, load_skill_text; c = load_config(); assert {"manager", "ux", "frontend", "backend", "qa", "architect", "fullstack", "devops"}.issubset(c.employees); assert load_skill_text(c, ["backend"])'
