@@ -1,8 +1,25 @@
 # Agentic Web Team
 
-A local, role-based development team for web projects and existing repositories. The web workflow uses a lead, UX designer, frontend engineer, backend engineer, and QA engineer. The repository-upgrade workflow uses a lead architect, senior full-stack engineer, DevOps engineer, and automation QA engineer. Both persist their state, route findings, and monitor the selected workspace until stopped. The agents use one configured OpenAI-compatible model endpoint; the default is a local Ollama model.
+Agentic Web Team is a local CLI that coordinates a role-based AI development team around a real workspace. It can help plan and build new web projects, upgrade existing repositories, run verification checks, route QA findings back to the right owner, and keep monitoring the project until you stop the workflow.
 
-The CLI does not create a sample website. A workflow starts only when you provide an actual goal. Agents do not have consciousness or guaranteed human-level judgment; evidence from checks and review is still required.
+The web workflow uses a lead, UX designer, frontend engineer, backend engineer, and QA engineer. The repository-upgrade workflow uses a lead architect, senior full-stack engineer, DevOps engineer, and automation QA engineer. All roles share one configured OpenAI-compatible model endpoint; the default setup uses a local Ollama model.
+
+This project is designed for hands-on development work, not throwaway demos. The CLI waits for a real goal, works against the workspace you select, records state between turns, and keeps evidence from tests, checks, and review in the loop. The agents can speed up development, but they are still tools: inspect generated changes before shipping.
+
+## Highlights
+
+- Role-based workflows for new web builds and existing repository upgrades
+- Persistent project state, shared notes, and resumable background service mode
+- QA repair loops that route findings back to UX, frontend, backend, full-stack, or DevOps
+- Local-first model support through Ollama, with OpenAI-compatible endpoint configuration
+- Built-in preview helpers for common Node and Django projects
+- Deterministic verification using lint, type, test, build, syntax, and HTTP smoke checks where available
+
+## Pipeline overview
+
+![Agentic Web Team pipeline showing planning, parallel implementation, QA repair loops, monitoring, and the separate GitHub CI checks](agentic-web-team-pipeline.png)
+
+The diagram shows how work moves from the initial request into planning, role handoff, implementation, verification, repair loops, and monitoring. `/start` focuses on building a web project from a goal, while `/upgrade` focuses on improving an existing repository. GitHub CI stays separate and runs on pushes and pull requests.
 
 ## Requirements and installation
 
