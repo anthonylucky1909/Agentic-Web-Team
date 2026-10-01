@@ -107,9 +107,7 @@ class SoftwareTeam:
         if self.service_connected:
             self.workflow.state = self.workflow._load()
         notes = self.notes_path.read_text(errors="replace")[-1500:] if self.notes_path.is_file() else "(none)"
-        conversation = [
-            event for event in self.history if event["speaker"] not in {"Workflow", "Local preview"}
-        ]
+        conversation = [event for event in self.history if event["speaker"] not in {"Workflow", "Local preview"}]
         recent = "\n".join(f"{event['speaker']}: {event['message'][:300]}" for event in conversation[-6:])
         return (
             f"Project notes:\n{notes}\n\nCurrent work:\n{self.workflow.summary()}\n\n"
